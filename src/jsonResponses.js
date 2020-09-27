@@ -1,4 +1,6 @@
-const users = {};
+const games = {
+
+};
 
 const respondJSON = (request, response, status, object) => {
   const headers = {
@@ -21,15 +23,15 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const getUsers = (request, response) => {
+const getGames = (request, response) => {
   const responseJSON = {
-    users,
+    games,
   };
 
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
+const getGamesMeta = (request, response) => respondJSONMeta(request, response, 200);
 
 const notFound = (request, response) => {
   const responseJSON = {
@@ -42,26 +44,27 @@ const notFound = (request, response) => {
 
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 
-const addUser = (request, response, body) => {
+const addGame = (request, response, body) => {
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'Game and dates are both required.',
   };
 
-  if (!body.name || !body.age) {
+  if (!body.name || !body.date ||!body.time) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
 
   let responseCode = 201;
 
-  if (users[body.name]) {
+  if (games[body.name]) {
     responseCode = 204;
   } else {
-    users[body.name] = {};
-    users[body.name].name = body.name;
+    games[body.name] = {};
+    games[body.name].name = body.name;
   }
 
-  users[body.name].age = body.age;
+  games[body.name].date = body.date;
+  games[body.name].time = body.time;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully!';
@@ -72,9 +75,9 @@ const addUser = (request, response, body) => {
 };
 
 module.exports = {
-  getUsers,
-  addUser,
-  getUsersMeta,
+  getGames,
+  addGame,
+  getGamesMeta,
   notFound,
   notFoundMeta,
 };

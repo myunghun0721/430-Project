@@ -7,7 +7,7 @@ const jsonHandler = require('./jsonResponses.js');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/addGame') {
     const body = [];
 
     request.on('error', (err) => {
@@ -24,7 +24,7 @@ const handlePost = (request, response, parsedUrl) => {
       const bodyString = Buffer.concat(body).toString();
       const bodyParams = query.parse(bodyString);
 
-      jsonHandler.addUser(request, response, bodyParams);
+      jsonHandler.addGame(request, response, bodyParams);
     });
   }
 };
@@ -33,15 +33,15 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
+    '/getGames': jsonHandler.getGames,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getUsers': jsonHandler.getUsersMeta,
+    '/getGames': jsonHandler.getGamesMeta,
     notFound: jsonHandler.notFoundMeta,
   },
   POST: {
-    '/addUser': jsonHandler.addUser,
+    '/addGame': jsonHandler.addGame,
     notFound: jsonHandler.notFoundMeta,
   },
 };
