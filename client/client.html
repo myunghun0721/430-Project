@@ -39,6 +39,40 @@
         else{
           content.innerHTML += `<p>${xhr.response}</p>`;
         }
+
+        let gameType = obj.games;
+        if(gameType){
+          if(gameType.Among_us){
+            console.log(gameType.Among_us.name);
+            console.log(gameType.Among_us.date);
+            console.log(gameType.Among_us.time);
+          }
+          if(gameType.League_of_legends){
+            console.log(gameType.League_of_legends.name);
+            console.log(gameType.League_of_legends.date);
+            console.log(gameType.League_of_legends.time);
+          }
+          if(gameType.Teamfight_tactics){
+            console.log(gameType.Teamfight_tactics.name);
+            console.log(gameType.Teamfight_tactics.date);
+            console.log(gameType.Teamfight_tactics.time);
+          }
+          if(gameType.Fall_guys){
+            console.log(gameType.Fall_guys.name);
+            console.log(gameType.Fall_guys.date);
+            console.log(gameType.Fall_guys.time);
+          }
+          if(gameType.Overwatch){
+            console.log(gameType.Overwatch.name);
+            console.log(gameType.Overwatch.date);
+            console.log(gameType.Overwatch.time);
+          }
+          if(gameType.Starcraft){
+            console.log(gameType.Starcraft.name);
+            console.log(gameType.Starcraft.date);
+            console.log(gameType.Starcraft.time);
+          }
+        }
       }
     };
 
@@ -110,10 +144,10 @@
     <form id="schedule" action="/addGame" method="post">
       <label for="name">Game name: </label>
       <select id="nameField" type="text" name="name">
-        <option value="Among us">Among us</option>
-        <option value="League of legends">League of legends</option>
-        <option value="Teamfight tactics">Teamfight tactics</option>
-        <option value="Fall guys">Fall guys</option>
+        <option value="Among_us">Among us</option>
+        <option value="League_of_legends">League of legends</option>
+        <option value="Teamfight_tactics">Teamfight tactics</option>
+        <option value="Fall_guys">Fall guys</option>
         <option value="Overwatch">Overwatch</option>
         <option value="Starcraft">Starcraft</option>
       </select>
