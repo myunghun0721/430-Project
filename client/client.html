@@ -3,6 +3,7 @@
 <head>
   <title>When to play?</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:200,400,700" rel="stylesheet">
   
   <script>
     const handleResponse = (xhr, parseResponse) => {
@@ -31,47 +32,24 @@
     const parseJSON = (xhr, content) => {
       if(xhr.response && xhr.getResponseHeader('Content-Type') === 'application/json'){
         const obj = JSON.parse(xhr.response);
-        //console.log(obj.games);
 
-        if(obj.message){
-          content.innerHTML += `<p>${obj.message}</p>`;
-        }
-        else{
-          content.innerHTML += `<p>${xhr.response}</p>`;
-        }
+        for(let game in obj.games) {
+          const gameDiv = document.createElement('div');
+          const gameTitle = document.createElement('h2');
+          const gameDate = document.createElement('b');
+          const gameTime = document.createElement('p');
 
-        let gameType = obj.games;
-        if(gameType){
-          if(gameType.Among_us){
-            console.log(gameType.Among_us.name);
-            console.log(gameType.Among_us.date);
-            console.log(gameType.Among_us.time);
-          }
-          if(gameType.League_of_legends){
-            console.log(gameType.League_of_legends.name);
-            console.log(gameType.League_of_legends.date);
-            console.log(gameType.League_of_legends.time);
-          }
-          if(gameType.Teamfight_tactics){
-            console.log(gameType.Teamfight_tactics.name);
-            console.log(gameType.Teamfight_tactics.date);
-            console.log(gameType.Teamfight_tactics.time);
-          }
-          if(gameType.Fall_guys){
-            console.log(gameType.Fall_guys.name);
-            console.log(gameType.Fall_guys.date);
-            console.log(gameType.Fall_guys.time);
-          }
-          if(gameType.Overwatch){
-            console.log(gameType.Overwatch.name);
-            console.log(gameType.Overwatch.date);
-            console.log(gameType.Overwatch.time);
-          }
-          if(gameType.Starcraft){
-            console.log(gameType.Starcraft.name);
-            console.log(gameType.Starcraft.date);
-            console.log(gameType.Starcraft.time);
-          }
+          gameTitle.textContent = obj.games[game].name;
+          gameDate.textContent = "Playing on: " + obj.games[game].date;
+          gameTime.textContent = "Playing at: " + obj.games[game].time;
+          
+           gameDiv.classList.add('game');
+           gameDiv.id = encodeURIComponent(game.trim());
+           gameDiv.appendChild(gameTitle);
+           gameDiv.appendChild(gameDate);
+           gameDiv.appendChild(gameTime);
+          
+           content.appendChild(gameDiv);
         }
       }
     };
@@ -135,12 +113,14 @@
     };
 
     window.onload = init;
-
+    function togglePopup(){
+      document.querySelector("#popup-1").classList.toggle("active");
+    }
   </script>
 </head>
 <body>
   <section id="top">
-    <h3>POST Status Code Tests</h3>
+    <h1>Schedule Your Game</h1>
     <form id="schedule" action="/addGame" method="post">
       <label for="name">Game name: </label>
       <select id="nameField" type="text" name="name">
@@ -172,5 +152,28 @@
   </section>
   <section id="content">
   </section>
+  
+
+
+
+  <div id="lol"></div>
+  <div id="tft"></div>
+  <div id="fall"></div>
+  <div id="overwatch"></div>
+  <div id="starcraft"></div>
+
+
+  <div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="close-btn" onclick="togglePopup()">&times;</div>
+      <p>content goes here</p>
+    </div>
+  </div>
+
+<form id="among">
+</form>
+
+<button onclick="togglePopup()">popup test</button>
 </body>
 </html>

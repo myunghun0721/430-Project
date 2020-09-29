@@ -1,5 +1,4 @@
 const games = {
-
 };
 
 const respondJSON = (request, response, status, object) => {
@@ -46,7 +45,7 @@ const notFoundMeta = (request, response) => respondJSONMeta(request, response, 4
 
 const addGame = (request, response, body) => {
   const responseJSON = {
-    message: 'Game and dates are both required.',
+    message: 'Game, dates, and time are required.',
   };
 
   if (!body.name || !body.date ||!body.time) {
