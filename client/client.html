@@ -80,9 +80,11 @@
     };
 
     const requestUpdate = (e, userForm) => {
-      const url = userForm.querySelector('#urlField').value;
-      const method = userForm.querySelector('#methodSelect').value;
-      
+      //const url = userForm.querySelector('#urlField').value;
+      const url = userButton.value;
+      //const method = userForm.querySelector('#methodSelect').value;
+      const method = 'get';
+
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
@@ -107,9 +109,16 @@
       schedule.addEventListener('submit', addGame);
 
       //user form
+      const getButton = document.querySelector('#userButton')
       const userForm = document.querySelector('#userForm');     
-      const getGames = (e) => requestUpdate(e, userForm); 
-      userForm.addEventListener('submit', getGames);
+      //const getGames = (e) => requestUpdate(e, userForm); 
+      const getGames = (e) => requestUpdate(e, getButton); 
+      //userForm.addEventListener('submit', getGames);
+
+      getButton.addEventListener('click', getGames);
+
+      // let myElement = document.querySelector('#hide');
+      //  myElement.style.display = 'none';
     };
 
     window.onload = init;
@@ -119,25 +128,16 @@
   </script>
 </head>
 <body>
+  <ul class="nav">
+    <h2 class="logo">When to play?</h2>
+  </ul>
+
+  <button class="postButton" onclick="togglePopup()">Create new schedule</button>
+  <br>
+  <button id="userButton" class="postButton" value="/getGames" method='get'>Get schedules</button>
+
+  <!-- <form id=hide>
   <section id="top">
-    <h1>Schedule Your Game</h1>
-    <form id="schedule" action="/addGame" method="post">
-      <label for="name">Game name: </label>
-      <select id="nameField" type="text" name="name">
-        <option value="Among_us">Among us</option>
-        <option value="League_of_legends">League of legends</option>
-        <option value="Teamfight_tactics">Teamfight tactics</option>
-        <option value="Fall_guys">Fall guys</option>
-        <option value="Overwatch">Overwatch</option>
-        <option value="Starcraft">Starcraft</option>
-      </select>
-      <label for="date">Date: </label>
-      <input id="dateField" type="date" name="date" value="2020-09-27" min="2020-01-01" max="2100-12-31">
-      <label for="time">Set time: </label>
-      <input id="timeField" type="time" name="appt" required>
-      <input type="submit" value="Post Game" />
-    </form>
-    <hr>
     <form id="userForm" action="/getGames" method="get">
       <select id='urlField'>
         <option value='/getGames'>/getGames</option>
@@ -147,33 +147,69 @@
         <option value="get">GET</option>
         <option value="head">HEAD</option>
       </select>
-      <input type="submit" value="Send" />
+      <input class="postButton" type="submit" value="Get schedule" />
     </form>
   </section>
+</form> -->
+
   <section id="content">
   </section>
   
-
-
-
-  <div id="lol"></div>
-  <div id="tft"></div>
-  <div id="fall"></div>
-  <div id="overwatch"></div>
-  <div id="starcraft"></div>
-
 
   <div class="popup" id="popup-1">
     <div class="overlay"></div>
     <div class="content">
       <div class="close-btn" onclick="togglePopup()">&times;</div>
-      <p>content goes here</p>
+      <form id="schedule" action="/addGame" method="post">
+        <h2>Schedule Game</h2>
+        <label for="name">Game name: </label>
+        <select id="nameField" type="text" name="name">
+          <option value="Among_us">Among us</option>
+          <option value="League_of_legends">League of legends</option>
+          <option value="Teamfight_tactics">Teamfight tactics</option>
+          <option value="Fall_guys">Fall guys</option>
+          <option value="Overwatch">Overwatch</option>
+          <option value="Starcraft">Starcraft</option>
+        </select>
+        <label for="date">Date: </label>
+        <input id="dateField" type="date" name="date" value="2020-09-27" min="2020-01-01" max="2100-12-31">
+        <br>
+        <label for="time">Time: </label>
+        <input id="timeField" type="time" name="appt" required>
+        <br>
+        <input class="postButton" type="submit" value="Post Game" />
+      </form>
     </div>
   </div>
 
-<form id="among">
-</form>
 
-<button onclick="togglePopup()">popup test</button>
+
+<!-- <form>
+  <div class="segment">
+    <h1>Sign up</h1>
+  </div>
+  
+  <label>
+    <input type="text" placeholder="Email Address"/>
+  </label>
+  <label>
+    <input type="password" placeholder="Password"/>
+  </label>
+  <button class="red" type="button"><i class="icon ion-md-lock"></i> Log in</button>
+  
+  <div class="segment">
+    <button class="unit" type="button"><i class="icon ion-md-arrow-back"></i></button>
+    <button class="unit" type="button"><i class="icon ion-md-bookmark"></i></button>
+    <button class="unit" type="button"><i class="icon ion-md-settings"></i></button>
+  </div>
+  
+  <div class="input-group">
+    <label>
+      <input type="text" placeholder="Email Address"/>
+    </label>
+    <button class="unit" type="button"><i class="icon ion-md-search"></i></button>
+  </div> 
+</form> -->
+
 </body>
 </html>
