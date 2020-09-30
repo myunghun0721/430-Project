@@ -49,6 +49,7 @@
            gameDiv.appendChild(gameDate);
            gameDiv.appendChild(gameTime);
           
+           gameDiv.setAttribute("onclick", "getGameInfo()");
            content.appendChild(gameDiv);
         }
       }
@@ -122,8 +123,14 @@
     };
 
     window.onload = init;
+
+
     function togglePopup(){
       document.querySelector("#popup-1").classList.toggle("active");
+    }
+
+    function getGameInfo(){
+      document.querySelector("#popup-2").classList.toggle("active");
     }
   </script>
 </head>
@@ -183,6 +190,14 @@
   </div>
 
 
+  <div class="popup" id="popup-2">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="close-btn" onclick="getGameInfo()">&times;</div>
+        <p>test</p>
+      </form>
+    </div>
+  </div>
 
 <!-- <form>
   <div class="segment">
