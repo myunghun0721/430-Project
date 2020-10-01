@@ -1,4 +1,10 @@
 const games = {
+   Example : {
+     name : 'Example Title',
+     date : '2020-09-27',
+     time : '13:30',
+     host : 'tester-h',
+   },
 };
 
 const respondJSON = (request, response, status, object) => {
@@ -48,7 +54,7 @@ const addGame = (request, response, body) => {
     message: 'Game, dates, and time are required.',
   };
 
-  if (!body.name || !body.date ||!body.time) {
+  if (!body.name || !body.date ||!body.time || !body.host) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -64,6 +70,7 @@ const addGame = (request, response, body) => {
 
   games[body.name].date = body.date;
   games[body.name].time = body.time;
+  games[body.name].host = body.host;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully!';
@@ -72,6 +79,8 @@ const addGame = (request, response, body) => {
 
   return respondJSONMeta(request, response, responseCode);
 };
+
+
 
 module.exports = {
   getGames,

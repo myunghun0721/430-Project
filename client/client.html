@@ -8,10 +8,11 @@
   <script>
     const handleResponse = (xhr, parseResponse) => {
       const content = document.querySelector('#content');
+      const gamePop = document.querySelector('#gamePop')
       
       switch(xhr.status){
         case 200:
-          content.innerHTML = '<b>Success!</b>'
+          content.innerHTML = '<b>Success!</b><br>'
           break;
         case 201:
           content.innerHTML = '<b>Created!</b>'
@@ -28,29 +29,38 @@
       }
       parseJSON(xhr, content);
     };
-
-    const parseJSON = (xhr, content) => {
+    let gameCount = document.createElement('p');
+    const parseJSON = (xhr, content, gamePop) => {
       if(xhr.response && xhr.getResponseHeader('Content-Type') === 'application/json'){
         const obj = JSON.parse(xhr.response);
+        const gameSet = obj.games;
 
-        for(let game in obj.games) {
+
+        let game;
+        for(game in gameSet) {
           const gameDiv = document.createElement('div');
           const gameTitle = document.createElement('h2');
           const gameDate = document.createElement('b');
           const gameTime = document.createElement('p');
+          const gameHost = document.createElement('p');
 
-          gameTitle.textContent = obj.games[game].name;
-          gameDate.textContent = "Playing on: " + obj.games[game].date;
-          gameTime.textContent = "Playing at: " + obj.games[game].time;
-          
+
+          gameCount.setAttribute("id", "numCount");
+          gameCount.setAttribute("value", 1);
+
+          gameTitle.textContent = gameSet[game].name;
+          gameDate.textContent = "Playing on: " + gameSet[game].date;
+          gameTime.textContent = "Playing at: " + gameSet[game].time;
+          gameHost.textContent = `Host: ${gameSet[game].host}`;
            gameDiv.classList.add('game');
            gameDiv.id = encodeURIComponent(game.trim());
            gameDiv.appendChild(gameTitle);
            gameDiv.appendChild(gameDate);
            gameDiv.appendChild(gameTime);
-          
-           gameDiv.setAttribute("onclick", "getGameInfo()");
+           gameDiv.appendChild(gameHost);
+
            content.appendChild(gameDiv);
+
         }
       }
     };
@@ -66,6 +76,8 @@
       const nameField = schedule.querySelector('#nameField');
       const dateField = schedule.querySelector('#dateField');
       const timeField = schedule.querySelector('#timeField');
+      const hostField = schedule.querySelector('#hostField');
+
 
       const xhr = new XMLHttpRequest();
       xhr.open(nameMethod, nameAction);
@@ -74,7 +86,8 @@
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
       xhr.onload = () => handleResponse(xhr);
-      const formData = `name=${nameField.value}&date=${dateField.value}&time=${timeField.value}`;
+      const formData = `name=${nameField.value}&date=${dateField.value}&time=${timeField.value}&host=${hostField.value}`;
+
       xhr.send(formData);
 
       return false;
@@ -109,17 +122,14 @@
       const addGame = (e) => sendPost(e, schedule);  
       schedule.addEventListener('submit', addGame);
 
+
+
       //user form
-      const getButton = document.querySelector('#userButton')
-      const userForm = document.querySelector('#userForm');     
-      //const getGames = (e) => requestUpdate(e, userForm); 
+      const getButton = document.querySelector('#userButton');
       const getGames = (e) => requestUpdate(e, getButton); 
       //userForm.addEventListener('submit', getGames);
 
       getButton.addEventListener('click', getGames);
-
-      // let myElement = document.querySelector('#hide');
-      //  myElement.style.display = 'none';
     };
 
     window.onload = init;
@@ -129,9 +139,11 @@
       document.querySelector("#popup-1").classList.toggle("active");
     }
 
-    function getGameInfo(){
-      document.querySelector("#popup-2").classList.toggle("active");
-    }
+
+    // function getGameInfo(){
+    //   //moreInfo.classList.toggle("active");
+    // }
+
   </script>
 </head>
 <body>
@@ -143,21 +155,6 @@
   <br>
   <button id="userButton" class="postButton" value="/getGames" method='get'>Get schedules</button>
 
-  <!-- <form id=hide>
-  <section id="top">
-    <form id="userForm" action="/getGames" method="get">
-      <select id='urlField'>
-        <option value='/getGames'>/getGames</option>
-        <option value='/notReal'>/notReal</option>
-      </select>
-      <select id="methodSelect">
-        <option value="get">GET</option>
-        <option value="head">HEAD</option>
-      </select>
-      <input class="postButton" type="submit" value="Get schedule" />
-    </form>
-  </section>
-</form> -->
 
   <section id="content">
   </section>
@@ -171,10 +168,10 @@
         <h2>Schedule Game</h2>
         <label for="name">Game name: </label>
         <select id="nameField" type="text" name="name">
-          <option value="Among_us">Among us</option>
-          <option value="League_of_legends">League of legends</option>
-          <option value="Teamfight_tactics">Teamfight tactics</option>
-          <option value="Fall_guys">Fall guys</option>
+          <option value="Among%20us">Among us</option>
+          <option value="League%20of%20legends">League of legends</option>
+          <option value="Teamfight%20tactics">Teamfight tactics</option>
+          <option value="Fall%20guys">Fall guys</option>
           <option value="Overwatch">Overwatch</option>
           <option value="Starcraft">Starcraft</option>
         </select>
@@ -184,47 +181,11 @@
         <label for="time">Time: </label>
         <input id="timeField" type="time" name="appt" required>
         <br>
+        <label>Your name: </label>
+        <input id="hostField" type="text" name="host" placeholder="Your Name" required>
         <input class="postButton" type="submit" value="Post Game" />
       </form>
     </div>
   </div>
-
-
-  <div class="popup" id="popup-2">
-    <div class="overlay"></div>
-    <div class="content">
-      <div class="close-btn" onclick="getGameInfo()">&times;</div>
-        <p>test</p>
-      </form>
-    </div>
-  </div>
-
-<!-- <form>
-  <div class="segment">
-    <h1>Sign up</h1>
-  </div>
-  
-  <label>
-    <input type="text" placeholder="Email Address"/>
-  </label>
-  <label>
-    <input type="password" placeholder="Password"/>
-  </label>
-  <button class="red" type="button"><i class="icon ion-md-lock"></i> Log in</button>
-  
-  <div class="segment">
-    <button class="unit" type="button"><i class="icon ion-md-arrow-back"></i></button>
-    <button class="unit" type="button"><i class="icon ion-md-bookmark"></i></button>
-    <button class="unit" type="button"><i class="icon ion-md-settings"></i></button>
-  </div>
-  
-  <div class="input-group">
-    <label>
-      <input type="text" placeholder="Email Address"/>
-    </label>
-    <button class="unit" type="button"><i class="icon ion-md-search"></i></button>
-  </div> 
-</form> -->
-
 </body>
 </html>

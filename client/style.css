@@ -1,7 +1,3 @@
-/* 
-https://ldrerin.tistory.com/467 
-https://dribbble.com/search/css
-*/
 *{
   font-family: Dosis;
   text-align: center;
@@ -15,9 +11,11 @@ body {
 }
 h1{
   font-size: 2em;
-  margin-top: 100px;
+  margin-top: 30px;
 }
-
+h2{
+  margin-bottom: 20px;
+}
 select{
   margin: 5px;
 }
@@ -39,6 +37,7 @@ select{
   display: none;
 }
 .popup .content {
+  border-radius: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,123 +75,13 @@ select{
   transform: translate(-50%, -50%) scale(1);
 }
 
-.nav{
-  font-size: 2em;
-  width: 100vw;
-  height: 100px;
-  background-color: #efeeee;
-  box-shadow: 10px 10px 12px 0 rgba(0,0,0,.07);
-  border-radius: 0 0 10px 10px;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 3rem;
-  padding-top: 1.7rem;
-  list-style-type: none;
-  margin-bottom: 1em;
-}
-
-.nav .logo{
-  margin-right: auto;
-  font-size: 2rem;
-  color: dimgray;
-  font-weight: 900;
-  text-shadow: 2px 2px 4px rgba(0,0,0,.3), -2px -2px 4px rgba(255,255,255,1);
-}
-
-
-.postButton {
-  margin-top: 30px;
-  padding: 1.5em 5em;
-  background: #efefef;
-  border: none;
-  border-radius: .5rem;
-  color: #444;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .2rem;
-  text-align: center;
-  outline: none;
-  cursor: pointer;
-  transition: .2s ease-in-out;
-  box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
-              -6px -6px 10px rgba(255, 255, 255, .5),
-              6px 6px 8px rgba(255, 255, 255, .075),
-              6px 6px 10px rgba(0, 0, 0, .15);
-}
-.postButton:hover {
-  color: #9494c7;
-}
-
-.postButton {
-  box-shadow: -4px -4px 6px rgba(255, 255, 255, 0.7), 4px 4px 6px #c0c0de, inset -4px -4px 12px rgba(255, 255, 255, 0.1), inset 4px 4px 12px #e8e8f3;
-}
-.postButton:hover {
-  box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.2), 4px 4px 6px #e8e8f3, inset -4px -4px 12px rgba(255, 255, 255, 0.6), inset -2px -2px 2px rgba(255, 255, 255, 0.2), inset 4px 4px 6px #c6c6e2;
-}
-
-body, p, input, select, textarea, button {
-  letter-spacing: -0.2px;
-  font-size: 16px;
-  margin: 10px;
-}
-
-div, p {
-  color: #444;
-  text-shadow: 1px 1px 1px #FFF;
-}
-
-form {
-  padding: 16px;
-  width: 320px;
-  margin: 0 auto;
-}
-
-.segment {
-  padding: 32px 0;
-  text-align: center;
-}
-
-input {
-  border: 0;
-  outline: 0;
-  font-size: 16px;
-  border-radius: 320px;
-  padding: 16px;
-  background-color: #EBECF0;
-  text-shadow: 1px 1px 0 #FFF;
-}
-
-label {
-  display: block;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: 100%;
-}
-
-input {
-  margin-right: 8px;
-  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-  width: 100%;
-  box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-input:focus {
-  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.input-group label {
-  margin: 0;
-  flex: 1;
-}
-
 .game{
-
+  margin: 1em;
+  border-color: black;
+  border-style: solid;
+  width: 20%;
+  box-sizing: border-box;
+  float: left;
 }
+
+
