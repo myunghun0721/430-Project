@@ -1,7 +1,7 @@
 const games = {
    Example : {
      name : 'Example Title',
-     date : '2020-09-27',
+     date : '2020-10-21',
      time : '13:30',
      host : 'tester-h',
    },

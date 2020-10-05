@@ -117,6 +117,7 @@
     };
     
     const init = () => {
+      dateValue();
       //name form
       const schedule = document.querySelector('#schedule'); 
       const addGame = (e) => sendPost(e, schedule);  
@@ -139,7 +140,47 @@
       document.querySelector("#popup-1").classList.toggle("active");
     }
 
-
+    function dateValue(){
+      let d = new Date();
+      let month = d.getMonth();
+      let day = d.getDate();
+      d.setMonth(month + 1);
+        if(day < 10){
+        switch(day){
+          case 1:
+            day = "01";
+            break;
+          case 2:
+            day = "02";
+            break;
+          case 3:
+            day = "03";
+            break;
+          case 4:
+            day = "04";
+            break;
+          case 5:
+            day = "05";
+            break;
+          case 6:
+            day = "06";
+            break;
+          case 7:
+            day = "07";
+            break;
+          case 8:
+            day = "08";
+            break;
+          case 9:
+            day = "09";
+            break;
+          default :
+            day = d.getDate();
+        }
+      }
+      dateField.value = `${d.getFullYear()}-${d.getMonth()}-${day}`;
+      dateField.min = `${d.getFullYear()}-${d.getMonth()}-${day}`;
+    }
     // function getGameInfo(){
     //   //moreInfo.classList.toggle("active");
     // }
@@ -176,7 +217,7 @@
           <option value="Starcraft">Starcraft</option>
         </select>
         <label for="date">Date: </label>
-        <input id="dateField" type="date" name="date" value="2020-09-27" min="2020-01-01" max="2100-12-31">
+        <input id="dateField" type="date" name="date" value="2020-10-05" min="2020-10-05" max="2100-12-31">
         <br>
         <label for="time">Time: </label>
         <input id="timeField" type="time" name="appt" required>

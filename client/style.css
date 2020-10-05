@@ -24,6 +24,29 @@ select{
   margin: 5px;
 }
 
+.nav{
+  font-size: 1.5em;
+  width: 100vw;
+  height: 100px;
+  background-color: #efeeee;
+  box-shadow: 8px 8px 10px 0 #c0c0de;
+  border-radius: 0 0 10px 10px;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 3rem;
+  padding-top: 1.7rem;
+  list-style-type: none;
+  margin-bottom: 1em;
+}
+
+.nav .logo{
+  margin-right: auto;
+  font-size: 2rem;
+  color: dimgray;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.3), -2px -2px 4px rgba(255,255,255,1);
+}
+
 #gameContents{
   margin: 50px;
   padding: 50px;
